@@ -49,7 +49,7 @@ else:
             st.session_state.authorized = False
             st.session_state.current_user = None
             st.session_state.show_login = True
-            st.experimental_rerun()
+            st.rerun()
 
         st.subheader("System Status")
         if st.session_state.failed_attempts > 0:
