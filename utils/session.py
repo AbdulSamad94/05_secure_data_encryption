@@ -18,9 +18,6 @@ def initialize_session_state():
     if "failed_attempts" not in st.session_state:
         st.session_state.failed_attempts = 0
 
-    if "last_failed_time" not in st.session_state:
-        st.session_state.last_failed_time = None
-
     if "authorized" not in st.session_state:
         st.session_state.authorized = False
 
