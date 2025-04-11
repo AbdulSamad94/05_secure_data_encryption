@@ -19,7 +19,9 @@ def show_store_data():
                 st.error("⚠️ All fields are required!")
             elif passkey != confirm_passkey:
                 st.error("⚠️ Passkeys do not match!")
-            elif user_id in st.session_state.stored_data:
+            elif user_id in st.session_state.stored_data.get(
+                st.session_state.current_user, {}
+            ):
                 st.error("⚠️ This ID already exists. Please use a different ID.")
             else:
                 success = store_new_data(user_id, user_data, passkey)

@@ -20,8 +20,12 @@ def show_retrieve_data():
             f"🔒 Account is temporarily locked. Please try again in {get_lockout_remaining()} seconds."
         )
     else:
+        # Get user-specific data IDs
+        current_user = st.session_state.current_user
+        user_data = st.session_state.stored_data.get(current_user, {})
+
         # Show available data IDs
-        if st.session_state.stored_data:
+        if user_data:
             data_ids = get_data_ids()
             selected_id = st.selectbox("Select data to retrieve:", data_ids)
 
@@ -53,6 +57,7 @@ def show_retrieve_data():
                             st.error(message)
 
                             if max_attempts_reached:
+                                st.session_state.authorized = False
                                 st.experimental_rerun()
         else:
             st.warning("No encrypted data found. Please store some data first.")

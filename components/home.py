@@ -3,7 +3,9 @@ import streamlit as st
 
 def show_home():
     """Display the home page"""
-    st.subheader("🏠 Welcome to the Secure Data System")
+    st.subheader(
+        f"🏠 Welcome to the Secure Data System, {st.session_state.current_user}!"
+    )
     st.write(
         "Use this app to **securely store and retrieve data** using unique passkeys."
     )
@@ -17,5 +19,10 @@ def show_home():
     """
     )
 
-    # Display number of encrypted items
-    st.metric("Encrypted Items Stored", len(st.session_state.stored_data))
+    # Display number of encrypted items for current user
+    current_user = st.session_state.current_user
+    user_items_count = 0
+    if current_user in st.session_state.stored_data:
+        user_items_count = len(st.session_state.stored_data[current_user])
+
+    st.metric("Your Encrypted Items", user_items_count)

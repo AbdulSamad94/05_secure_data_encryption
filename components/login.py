@@ -3,13 +3,14 @@ import time
 from services.authentication import (
     is_locked_out,
     get_lockout_remaining,
-    verify_master_password,
+    verify_user_credentials,
+    handle_failed_login_attempt,
 )
 
 
 def show_login():
-    """Display the login/reauthorization page"""
-    st.subheader("🔑 Authorization Required")
+    """Display the login page"""
+    st.subheader("🔑 Login")
 
     if is_locked_out():
         st.error(
@@ -17,18 +18,26 @@ def show_login():
         )
     else:
         with st.form("login_form"):
-            st.write("You've been locked out due to too many failed attempts.")
-            login_pass = st.text_input(
-                "Enter Master Password to continue:", type="password"
-            )
+            username = st.text_input("Username:")
+            password = st.text_input("Password:", type="password")
             submit_button = st.form_submit_button("Login")
 
             if submit_button:
-                if verify_master_password(login_pass):
+                if not username or not password:
+                    st.error("⚠️ All fields are required!")
+                elif verify_user_credentials(username, password):
                     st.session_state.failed_attempts = 0
                     st.session_state.authorized = True
-                    st.success("✅ Authentication successful!")
-                    time.sleep(1)  # Short delay for the success message to show
+                    st.session_state.current_user = username
+                    st.success("✅ Login successful!")
+                    time.sleep(1)
                     st.experimental_rerun()
                 else:
-                    st.error("❌ Incorrect password!")
+                    st.error("❌ Invalid username or password!")
+                    handle_failed_login_attempt(username)
+
+        # Link to registration page
+        if st.button("Don't have an account? Register here"):
+            st.session_state.show_register = True
+            st.session_state.show_login = False
+            st.experimental_rerun()
