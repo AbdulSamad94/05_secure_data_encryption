@@ -12,7 +12,6 @@ def verify_passkey(passkey, stored_hash):
 def handle_failed_attempt():
     """Handle a failed authentication attempt"""
     st.session_state.failed_attempts += 1
-    st.session_state.last_failed_time = time.time()
 
     # If current user exists, update their failed attempts in users dict
     if (
@@ -22,9 +21,6 @@ def handle_failed_attempt():
         st.session_state.users[st.session_state.current_user][
             "failed_attempts"
         ] = st.session_state.failed_attempts
-        st.session_state.users[st.session_state.current_user][
-            "last_failed_time"
-        ] = st.session_state.last_failed_time
         save_users_to_file()
 
     remaining = 3 - st.session_state.failed_attempts
