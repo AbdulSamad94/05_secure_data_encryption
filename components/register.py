@@ -27,7 +27,7 @@ def show_register():
                     time.sleep(1)
                     st.session_state.show_login = True
                     st.session_state.show_register = False
-                    st.experimental_rerun()
+                    st.rerun()
                 else:
                     st.error("⚠️ Registration failed. Please try again.")
 
@@ -35,4 +35,4 @@ def show_register():
     if st.button("Already have an account? Login here"):
         st.session_state.show_register = False
         st.session_state.show_login = True
-        st.experimental_rerun()
+        st.rerun()

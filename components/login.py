@@ -31,7 +31,7 @@ def show_login():
                     st.session_state.current_user = username
                     st.success("✅ Login successful!")
                     time.sleep(1)
-                    st.experimental_rerun()
+                    st.rerun()
                 else:
                     st.error("❌ Invalid username or password!")
                     handle_failed_login_attempt(username)
@@ -40,4 +40,4 @@ def show_login():
         if st.button("Don't have an account? Register here"):
             st.session_state.show_register = True
             st.session_state.show_login = False
-            st.experimental_rerun()
+            st.rerun()
