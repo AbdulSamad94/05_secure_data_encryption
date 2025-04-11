@@ -17,6 +17,8 @@ def show_register():
         if submit_button:
             if not username or not password:
                 st.error("⚠️ All fields are required!")
+            elif len(password) < 8:
+                st.error("⚠️ Password must be at least 8 characters long!")
             elif password != confirm_password:
                 st.error("⚠️ Passwords do not match!")
             elif username_exists(username):

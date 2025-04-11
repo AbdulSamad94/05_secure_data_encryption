@@ -17,6 +17,10 @@ def show_store_data():
         if submit_button:
             if not user_id or not user_data or not passkey:
                 st.error("⚠️ All fields are required!")
+            elif len(passkey) < 8:
+                st.error("⚠️ Passkey must be at least 8 characters long!")
+            elif len(user_id) < 4:
+                st.error("⚠️ ID must be at least 4 characters long!")
             elif passkey != confirm_passkey:
                 st.error("⚠️ Passkeys do not match!")
             elif user_id in st.session_state.stored_data.get(
