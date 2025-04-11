@@ -3,9 +3,7 @@ import streamlit as st
 
 def show_home():
     """Display the home page"""
-    st.subheader(
-        f"🏠 Welcome to the Secure Data System, {st.session_state.current_user}!"
-    )
+    st.subheader(f"Welcome to the Secure Data System, {st.session_state.current_user}!")
     st.write(
         "Use this app to **securely store and retrieve data** using unique passkeys."
     )

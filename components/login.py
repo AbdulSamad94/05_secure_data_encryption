@@ -8,7 +8,7 @@ from services.authentication import (
 
 def show_login():
     """Display the login page"""
-    st.subheader("🔑 Login")
+    st.subheader("Login")
 
     with st.form("login_form"):
         username = st.text_input("Username:")

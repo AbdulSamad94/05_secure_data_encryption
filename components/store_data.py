@@ -4,7 +4,7 @@ from services.storage import store_new_data
 
 def show_store_data():
     """Display the store data page"""
-    st.subheader("📂 Store Data Securely")
+    st.subheader("Store Data Securely")
 
     with st.form("store_data_form"):
         user_id = st.text_input("Enter a unique ID for this data:")

@@ -5,7 +5,7 @@ from services.authentication import register_new_user, username_exists
 
 def show_register():
     """Display the registration page"""
-    st.subheader("📝 Register New Account")
+    st.subheader("Register New Account")
 
     with st.form("register_form"):
         username = st.text_input("Username:")

@@ -11,7 +11,7 @@ import time
 
 def show_retrieve_data():
     """Display the retrieve data page"""
-    st.subheader("🔍 Retrieve Your Data")
+    st.subheader("Retrieve Your Data")
 
     current_user = st.session_state.current_user
     user_data = st.session_state.stored_data.get(current_user, {})
